@@ -15,12 +15,24 @@ function insertAfterCursor(content) {
     main_display.value = main_display.value.substring(0, cursor_startpos) + content + main_display.value.substring(cursor_startpos);
 }
 
+function clearDisplay() {
+    const main_display = getMainDisplay();
+    main_display.value = "";
+}
+
 function onClick(e) {
-    insertAfterCursor(e.target.innerHTML);
+    insertAfterCursor(e.target.innerText);
+}
+
+function onFunctionClick(e) {
+    insertAfterCursor(e.target.innerText);
 }
 
 function onOperatorClick(e) {
-    insertAfterCursor(e.target.innerHTML);
+    // TODO: Maybe make a callback mapping?
+    if (e.target.innerText === "AC") {
+        clearDisplay();
+    }
 }
 
 function onEvalClick() {
