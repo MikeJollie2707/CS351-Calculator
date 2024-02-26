@@ -16,14 +16,13 @@ function insertAfterCursor(content) {
 
     const cursor_startpos = main_display.selectionStart;
     const cursor_endpos = main_display.selectionEnd;
-    if (cursor_startpos !== cursor_endpos) {
-        // TODO: Do something about this.
-        return;
-    }
-
-    main_display.value = main_display.value.substring(0, cursor_startpos) + content + main_display.value.substring(cursor_startpos);
+    // if start == end, then we simply insert in between left of cursor and right of cursor, which is [0, i) and [i, ...]
+    // if start != end, selectionEnd is pass the last selected character, so we can also use [0, i) and [i, ...] to ignore selected characters.
+    main_display.value = main_display.value.substring(0, cursor_startpos) + content + main_display.value.substring(cursor_endpos);
     
-    main_display.selectionStart = main_display.selectionEnd = cursor_startpos + content.length;
+    // Move the cursor after the inserted content.
+    const new_cursor_pos = cursor_startpos + content.length;
+    main_display.setSelectionRange(new_cursor_pos, new_cursor_pos);
 }
 
 function clearDisplay() {
