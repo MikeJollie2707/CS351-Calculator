@@ -1,5 +1,6 @@
 // Keys that works as-is: You press, it shows up on the display
-const ALLOWED_REGULAR_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+// The only exception here is the '(', which will also display a closing parentheses.
+const ALLOWED_REGULAR_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '(', ')']
 // Keys that will create a mathematical function. This includes basic arithmetic operators.
 const ALLOWED_FUNC_KEYS = ['+', '-', '*', '/']
 // Keys that will "do something" to the calculator itself.
@@ -38,7 +39,12 @@ function onClick(e) {
     btn.blur();
 }
 function handleValue(value) {
-    insertAfterCursor(value);    
+    if (value !== '(') {
+        insertAfterCursor(value);
+    }
+    else {
+        insertAfterCursor("()")
+    }    
 }
 
 function onFunctionClick(e) {
