@@ -16,8 +16,11 @@ function insertAfterCursor(content) {
 }
 
 function onClick(e) {
-    const main_display = getMainDisplay();
-    main_display.value += e.target.innerHTML;
+    insertAfterCursor(e.target.innerHTML);
+}
+
+function onOperatorClick(e) {
+    insertAfterCursor(e.target.innerHTML);
 }
 
 function onEvalClick() {
