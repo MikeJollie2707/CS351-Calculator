@@ -3,7 +3,7 @@ const ALLOWED_REGULAR_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 // Keys that will create a mathematical function. This includes basic arithmetic operators.
 const ALLOWED_FUNC_KEYS = ['+', '-', '*', '/']
 // Keys that will "do something" to the calculator itself.
-const ALLOWED_OP_KEYS = ["=", "Enter", "Backspace", "ArrowLeft", "ArrowRight"]
+const ALLOWED_OP_KEYS = ["=", "Enter", "Backspace", "ArrowLeft", "ArrowRight", "Escape"]
 
 function getMainDisplay() {
     return document.getElementById("main-display");
@@ -89,8 +89,11 @@ document.addEventListener("keydown", (e) => {
     }
     else if (ALLOWED_OP_KEYS.includes(key)) {
         if (key === "Enter" || key === "=") {
-            e.preventDefault();
+            e.preventDefault(); // Prevent the = key from showing up, even if for a moment.
             onEvalClick();
+        }
+        if (key === "Escape") {
+            clearDisplay();
         }
     }
     else {
