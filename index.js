@@ -43,7 +43,7 @@ function clearDisplay() {
 
 function onClick(e) {
     const btn = e.target;
-    handleValue(e.target.innerText);
+    handleValue(btn.innerText);
     
     // Without this, pressing Enter after clicking a button will repeat that number.
     btn.blur();
@@ -60,7 +60,7 @@ function handleValue(value) {
 
 function onFunctionClick(e) {
     const btn = e.target;
-    handleFunction(e.target.innerText);
+    handleFunction(btn.innerText);
     
     // Without this, pressing Enter after clicking a button will repeat that number.
     btn.blur();
@@ -71,7 +71,8 @@ function handleFunction(f) {
 
 function onOperatorClick(e) {
     // TODO: Maybe make a callback mapping?
-    if (e.target.innerText === "AC") {
+    const btn = e.target;
+    if (btn.innerText === "AC") {
         clearDisplay();
     }
 }
