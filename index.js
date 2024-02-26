@@ -80,10 +80,17 @@ function onEvalClick() {
     const main_display = getMainDisplay();
     const expression = main_display.value;
 
-    const result = eval(expression);
-    console.log(result);
-    clearDisplay();
-    insertAfterCursor(result);
+    try {
+        const result = eval(expression);
+        console.log(result);
+        clearDisplay();
+        insertAfterCursor(result);
+    }
+    catch {
+        clearDisplay();
+        insertAfterCursor("Error.");
+    }
+    is_showing_result = true;
 }
 
 // Allow user keyboard input.
