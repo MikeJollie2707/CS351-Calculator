@@ -10,7 +10,7 @@ function getMainDisplay() {
     return document.getElementById("main-display");
 }
 
-function insertAfterCursor(content) {
+function insertAfterCursor(content, cursor_offset=null) {
     const main_display = getMainDisplay();
     // Make sure the cursor is visible.
     main_display.focus();
@@ -21,8 +21,11 @@ function insertAfterCursor(content) {
     // if start != end, selectionEnd is pass the last selected character, so we can also use [0, i) and [i, ...] to ignore selected characters.
     main_display.value = main_display.value.substring(0, cursor_startpos) + content + main_display.value.substring(cursor_endpos);
     
-    // Move the cursor after the inserted content.
-    const new_cursor_pos = cursor_startpos + content.length;
+    // Move the cursor by a distance from its current position.
+    // By default we want to move it to the length of the content
+    // so it'll appear after the newly inserted content.
+    const cursor_dist = cursor_offset !== null ? cursor_offset : content.length;
+    const new_cursor_pos = cursor_startpos + cursor_dist;
     main_display.setSelectionRange(new_cursor_pos, new_cursor_pos);
 }
 
@@ -43,7 +46,8 @@ function handleValue(value) {
         insertAfterCursor(value);
     }
     else {
-        insertAfterCursor("()")
+        // Put cursor in between.
+        insertAfterCursor("()", 1);
     }    
 }
 
