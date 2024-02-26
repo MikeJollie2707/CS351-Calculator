@@ -6,6 +6,8 @@ const ALLOWED_FUNC_KEYS = ['+', '-', '*', '/']
 // Keys that will "do something" to the calculator itself.
 const ALLOWED_OP_KEYS = ["=", "Enter", "Backspace", "ArrowLeft", "ArrowRight", "Escape"]
 
+let is_showing_result = false;
+
 function getMainDisplay() {
     return document.getElementById("main-display");
 }
@@ -14,6 +16,11 @@ function insertAfterCursor(content, cursor_offset=null) {
     const main_display = getMainDisplay();
     // Make sure the cursor is visible.
     main_display.focus();
+
+    if (is_showing_result) {
+        clearDisplay();
+        is_showing_result = false;
+    }
 
     const cursor_startpos = main_display.selectionStart;
     const cursor_endpos = main_display.selectionEnd;
