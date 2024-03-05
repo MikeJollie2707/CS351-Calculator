@@ -4,49 +4,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>CalcHub! - A calculator</title>
+  <title>Simple Calculator</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
   <link href="utils.css" rel="stylesheet" type="text/css" />
+  <script src="index.js" async></script>
 </head>
 
 <body>
-  <h1 class="text-center">Welcome to CalcHub!</h1>
-  <div class="container flex flex-col items-center mx-auto m-w-20">
-    <div class="row">
-      <input class="input" type="text"/>
+  <div class="container flex flex-col items-center">
+    <div class="displays flex flex-col">
+      <input class="input" id="main-display"/>
+      <input class="input" id="result-display"/>
     </div>
-    <div class="row">
-      <button class="button">C</button>
-      <button class="button">%</button>
-      <button class="button">M+</button>
-      <button class="button">M-</button>
+
+    <!-- TODO: Add functionalities to these buttons -->
+    <div class="operators-btns flex">
+      <button></button>
+      <button></button>
+      <button></button>
+      <button></button>
     </div>
-    <div class="row">
-      <button class="button">7</button>
-      <button class="button">8</button>
-      <button class="button">9</button>
-      <button class="button">*</button>
+
+    <!-- Add complex buttons here. -->
+    <div class="functions-btns flex">
+
     </div>
-    <div class="row">
-      <button class="button">4</button>
-      <button class="button">5</button>
-      <button class="button">6</button>
-      <button class="button">/</button>
-    </div>
-    <div class="row">
-      <button class="button">1</button>
-      <button class="button">2</button>
-      <button class="button">3</button>
-      <button class="button">+</button>
-    </div>
-    <div class="row">
-      <button class="button">0</button>
-      <button class="button">.</button>
-      <button class="button">=</button>
-      <button class="button">-</button>
+
+    <div class="main-btns grid">
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>CL</button>
+      <button>AC</button>
+    
+    
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>*</button>
+      <button>/</button>
+    
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>+</button>
+      <button>-</button>
+    
+      <button>0</button>
+      <button>.</button>
+      <button>^</button>
+      <button>Ans</button>
+      <button>=</button>
     </div>
   </div>
-  <script src="script.js"></script>
 </body>
 
 </html>

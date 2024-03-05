@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    border-style: none;
+}
+input:focus {
+    outline: none;
+}
+#result-display {
+    text-align: right;
+}
+
+.container {
+    gap: 12px;
+
+    border-style: solid;
+    border-width: 2px 2px 2px 2px;
+    border-radius: 6px;
+    border-color: black;
+
+    padding: 6px 6px 6px 6px;
+}
+
+.displays {
+    width: 100%;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 2px;
+}
+
+.main-btns {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 4px;
+}
