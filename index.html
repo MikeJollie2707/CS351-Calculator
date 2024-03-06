@@ -1,62 +1,60 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Simple Calculator</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="utils.css" rel="stylesheet" type="text/css" />
+    <script type="module" src="index.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Simple Calculator</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-  <link href="utils.css" rel="stylesheet" type="text/css" />
-  <script type="module" src="index.js" defer></script>
-</head>
+  <body>
+    <div class="container flex flex-col items-center">
+      <div class="displays flex flex-col">
+        <input class="input" id="main-display"/>
+        <input class="input" id="result-display" readonly/>
+      </div>
 
-<body>
-  <div class="container flex flex-col items-center">
-    <div class="displays flex flex-col">
-      <input class="input" id="main-display"/>
-      <input class="input" id="result-display" readonly/>
+      <!-- TODO: Add functionalities to these buttons -->
+      <div class="operators-btns flex">
+        <button class="op-btn">&#x25c1;</button>
+        <button></button>
+        <button></button>
+        <button class="op-btn">&#x25b7;</button>
+      </div>
+
+      <!-- Add complex buttons here. -->
+      <div class="functions-btns flex">
+
+      </div>
+
+      <div class="main-btns grid">
+        <button class="normal-btn">7</button>
+        <button class="normal-btn">8</button>
+        <button class="normal-btn">9</button>
+        <button class="op-btn">CL</button>
+        <button class="op-btn">AC</button>
+      
+      
+        <button class="normal-btn">4</button>
+        <button class="normal-btn">5</button>
+        <button class="normal-btn">6</button>
+        <button class="func-btn">*</button>
+        <button class="func-btn">/</button>
+      
+        <button class="normal-btn">1</button>
+        <button class="normal-btn">2</button>
+        <button class="normal-btn">3</button>
+        <button class="func-btn">+</button>
+        <button class="func-btn">-</button>
+      
+        <button class="normal-btn">0</button>
+        <button class="normal-btn">.</button>
+        <button>^</button>
+        <button>Ans</button>
+        <button class="op-btn">=</button>
+      </div>
     </div>
-
-    <!-- TODO: Add functionalities to these buttons -->
-    <div class="operators-btns flex">
-      <button class="op-btn">&#x25c1;</button>
-      <button></button>
-      <button></button>
-      <button class="op-btn">&#x25b7;</button>
-    </div>
-
-    <!-- Add complex buttons here. -->
-    <div class="functions-btns flex">
-
-    </div>
-
-    <div class="main-btns grid">
-      <button class="normal-btn">7</button>
-      <button class="normal-btn">8</button>
-      <button class="normal-btn">9</button>
-      <button class="op-btn">CL</button>
-      <button class="op-btn">AC</button>
-    
-    
-      <button class="normal-btn">4</button>
-      <button class="normal-btn">5</button>
-      <button class="normal-btn">6</button>
-      <button class="func-btn">*</button>
-      <button class="func-btn">/</button>
-    
-      <button class="normal-btn">1</button>
-      <button class="normal-btn">2</button>
-      <button class="normal-btn">3</button>
-      <button class="func-btn">+</button>
-      <button class="func-btn">-</button>
-    
-      <button class="normal-btn">0</button>
-      <button class="normal-btn">.</button>
-      <button>^</button>
-      <button>Ans</button>
-      <button class="op-btn">=</button>
-    </div>
-  </div>
-</body>
-
+  </body>
 </html>
