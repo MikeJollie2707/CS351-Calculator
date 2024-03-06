@@ -14,15 +14,15 @@
   <div class="container flex flex-col items-center">
     <div class="displays flex flex-col">
       <input class="input" id="main-display"/>
-      <input class="input" id="result-display"/>
+      <input class="input" id="result-display" readonly/>
     </div>
 
     <!-- TODO: Add functionalities to these buttons -->
     <div class="operators-btns flex">
+      <button class="op-btn">&#x25c1;</button>
       <button></button>
       <button></button>
-      <button></button>
-      <button></button>
+      <button class="op-btn">&#x25b7;</button>
     </div>
 
     <!-- Add complex buttons here. -->
@@ -31,30 +31,30 @@
     </div>
 
     <div class="main-btns grid">
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button>CL</button>
-      <button>AC</button>
+      <button class="normal-btn">7</button>
+      <button class="normal-btn">8</button>
+      <button class="normal-btn">9</button>
+      <button class="op-btn">CL</button>
+      <button class="op-btn">AC</button>
     
     
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>*</button>
-      <button>/</button>
+      <button class="normal-btn">4</button>
+      <button class="normal-btn">5</button>
+      <button class="normal-btn">6</button>
+      <button class="func-btn">*</button>
+      <button class="func-btn">/</button>
     
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>+</button>
-      <button>-</button>
+      <button class="normal-btn">1</button>
+      <button class="normal-btn">2</button>
+      <button class="normal-btn">3</button>
+      <button class="func-btn">+</button>
+      <button class="func-btn">-</button>
     
-      <button>0</button>
-      <button>.</button>
+      <button class="normal-btn">0</button>
+      <button class="normal-btn">.</button>
       <button>^</button>
       <button>Ans</button>
-      <button>=</button>
+      <button class="op-btn">=</button>
     </div>
   </div>
 </body>
