@@ -1,4 +1,5 @@
 import * as display from "./controllers.js";
+import * as hist from "./history.js";
 
 // Keys that works as-is: You press, it shows up on the display
 // The only exception here is the '(', which will also display a closing parentheses.
@@ -6,7 +7,7 @@ const ALLOWED_REGULAR_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
 // Keys that will create a mathematical function. This includes basic arithmetic operators.
 const ALLOWED_FUNC_KEYS = ['+', '-', '*', '/']
 // Keys that will "do something" to the calculator itself.
-const ALLOWED_OP_KEYS = ["=", "Enter", "Backspace", "ArrowLeft", "ArrowRight", "Escape"]
+const ALLOWED_OP_KEYS = ["=", "Enter", "Backspace", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Escape"]
 
 export function onClick(e) {
     const btn = e.target;
@@ -38,6 +39,22 @@ export function onOperatorClick(e) {
     else if (btn.innerText === "\u{25b7}") {
         console.log("I said coming soon...");
     }
+    else if (btn.innerText === "Up") {
+        const history = hist.getPreviousHistory();
+        if (!history) {
+            return;
+        }
+
+        displayHistory(history);
+    }
+    else if (btn.innerText === "Down") {
+        const history = hist.getNextHistory();
+        if (!history) {
+            return;
+        }
+
+        displayHistory(history);
+    }
     else if (btn.innerText === "DEL") {
         // NOTE: Doesn't seem to register the KeyboardEvent so I can't really utilize backspace here.
         display.deleteBeforeCursor();
@@ -55,6 +72,7 @@ export function onEvalClick() {
         const result = eval(expression);
         console.log(result);
         display.writeResult(result);
+        hist.addHistory({expression: expression, result: result});
     }
     catch {
         display.clearMainDisplay();
@@ -74,6 +92,13 @@ function handleValue(value) {
 
 function handleFunction(f) {
     display.insertAfterCursor(f);
+}
+
+function displayHistory(history) {
+    const {expression, result} = history;
+    display.clearMainDisplay();
+    display.insertAfterCursor(expression);
+    display.writeResult(result);
 }
 
 // Allow user keyboard input.
@@ -108,6 +133,21 @@ document.addEventListener("keydown", (e) => {
                 display.clearResultDisplay,
                 display.clearMainDisplay,
             ]);
+        }
+        else if (key === "ArrowUp" || key === "ArrowDown") {
+            e.preventDefault();
+
+            let getHistory = hist.getPreviousHistory;
+            if (key === "ArrowDown") {
+                getHistory = hist.getNextHistory;
+            }
+
+            const history = getHistory();
+            if (!history) {
+                return;
+            }
+
+            displayHistory(history);
         }
     }
     else {
