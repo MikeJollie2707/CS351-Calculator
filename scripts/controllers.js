@@ -17,7 +17,7 @@
  * - ** is only recommended after implementing point 1.
  * 
  * 3. Ans
- * - Currently there are no defined behavior for cases like AnsAns+Ans3. However, Ans itself is an atom in logical expr.
+ * - Ans will act like MR in old calculator: It'll inject the value upon press. The difference is it'll inject previous result. It is an op btn.
  * 
  */
 
