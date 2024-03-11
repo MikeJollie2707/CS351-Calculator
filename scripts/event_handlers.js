@@ -73,6 +73,8 @@ export function onEvalClick() {
         console.log(result);
         display.writeResult(result);
         hist.addHistory({expression: expression, result: result});
+        
+        main_display.blur();
     }
     catch {
         display.clearMainDisplay();
