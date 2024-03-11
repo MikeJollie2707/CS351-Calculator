@@ -38,7 +38,7 @@ export function onOperatorClick(e) {
     else if (btn.innerText === "\u{25b7}") {
         console.log("I said coming soon...");
     }
-    else if (btn.innerText === "CL") {
+    else if (btn.innerText === "DEL") {
         // NOTE: Doesn't seem to register the KeyboardEvent so I can't really utilize backspace here.
         display.deleteBeforeCursor();
     }
