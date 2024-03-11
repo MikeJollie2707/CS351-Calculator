@@ -1,3 +1,26 @@
+/**
+ * NOTE:
+ * Before implementing functions, there are some things to consider:
+ * 1. How cursor movement will be decided.
+ * - For now, the cursor treat each character as a separate atom. So something like "**" is considered as 2 multiplications by the cursor.
+ * - In that sense, for the sake of correctness, the cursor should NOT be able to be placed in between the exponent.
+ * - Same reasoning for function. It should NOT be possible to place cursor anywhere in between Math.sin( for example. Either at the start or the end.
+ * => A potential solution is to separate the display expr from the inner expr. Let's call this the "logical" expr.
+ * For example, the expression 5-(3+6) will be stored in logical expr as ['5', '-', '(', '3', '+', '6', ')']
+ * Another example, the expr 5+Math.sin(0.5) is stored as ['5', '+', 'Math.sin(', '0', '.', '5', ')']
+ * The "logical" cursor is therefore an index pointing to this logical expr. Wherever it is pointing, the display cursor will be right after it.
+ * For example, the expr 5-|(3+6) with vertical bar as cursor will correspond to logical cursor being 1, pointing to the '-'.
+ * Ofc we'll need to translate the logical cursor and expr into display cursor and expr. There will be functions for that.
+ * This will ensure that when we backspace a function, we'll delete the entire function in one go.
+ * 
+ * 2. Should exponent be ** or Math.pow()
+ * - ** is only recommended after implementing point 1.
+ * 
+ * 3. Ans
+ * - Currently there are no defined behavior for cases like AnsAns+Ans3. However, Ans itself is an atom in logical expr.
+ * 
+ */
+
 export function getMainDisplay() {
     return document.getElementById("main-display");
 }
