@@ -31,6 +31,10 @@ input:focus {
     border-radius: 2px;
 }
 
+.operators-btns {
+    width: 40%;
+}
+
 .main-btns {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 4px;

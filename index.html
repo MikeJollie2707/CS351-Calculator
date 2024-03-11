@@ -13,16 +13,22 @@
   <body>
     <div class="container flex flex-col items-center">
       <div class="displays flex flex-col">
+        <!-- Not readonly cuz we need the cursor. -->
         <input class="input" id="main-display"/>
         <input class="input" id="result-display" readonly/>
       </div>
 
-      <!-- TODO: Add functionalities to these buttons -->
-      <div class="operators-btns flex">
-        <button class="op-btn">&#x25c1;</button>
-        <button class="op-btn">Up</button>
-        <button class="op-btn">Down</button>
-        <button class="op-btn">&#x25b7;</button>
+      <div class="operators-btns flex flex-col">
+        <div class="flex justify-center">
+          <button class="op-btn">&#x25b3;</button>
+        </div>
+        <div class="flex justify-between">
+          <button class="op-btn">&#x25c1;</button>
+          <button class="op-btn">&#x25b7;</button>
+        </div>
+        <div class="flex justify-center">
+          <button class="op-btn">&#x25bd;</button>
+        </div>
       </div>
 
       <!-- Add complex buttons here. -->
