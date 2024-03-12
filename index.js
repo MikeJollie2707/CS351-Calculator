@@ -13,3 +13,9 @@ for (const btn of function_btns) {
 for (const btn of op_btns) {
     btn.addEventListener("click", (e) => listener.onOperatorClick(e));
 }
+
+// Fix #1
+document.onmousedown = (e) => {
+    // Prevent focus from losing from the input field.
+    e.preventDefault();
+}

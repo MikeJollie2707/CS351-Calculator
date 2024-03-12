@@ -51,6 +51,12 @@ export function insertAfterCursor(content, cursor_offset=null) {
     // so it'll appear after the newly inserted content.
     const cursor_dist = cursor_offset !== null ? cursor_offset : content.length;
     const new_cursor_pos = cursor_startpos + cursor_dist;
+
+    // Don't remove this.
+    // Fix #1
+    main_display.blur();
+    main_display.focus();
+
     main_display.setSelectionRange(new_cursor_pos, new_cursor_pos);
 }
 
