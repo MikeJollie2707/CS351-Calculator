@@ -1,5 +1,6 @@
 import * as display from "./controllers.js";
 import * as hist from "./history.js";
+import * as ops from "./operators.js";
 
 // Keys that works as-is: You press, it shows up on the display
 // The only exception here is the '(', which will also display a closing parentheses.
@@ -30,77 +31,49 @@ export function onOperatorClick(e) {
     const btn = e.target;
     console.log(btn.innerText);
     if (btn.innerText === "AC") {
-        display.clearMainDisplay();
-        display.clearResultDisplay();
+        ops.clearScreen();
     }
     else if (btn.innerText === "\u{25c1}") {
-        console.log("Coming soon...");
+        ops.moveCursorLeft();
     }
     else if (btn.innerText === "\u{25b7}") {
-        console.log("I said coming soon...");
+        ops.moveCursorRight();
     }
     else if (btn.innerText === "Up") {
-        const history = hist.getPreviousHistory();
-        if (!history) {
-            return;
-        }
-
-        displayHistory(history);
+        ops.showLastHistory();
     }
     else if (btn.innerText === "Down") {
-        const history = hist.getNextHistory();
-        if (!history) {
-            return;
-        }
-
-        displayHistory(history);
+        ops.showNextHistory();
     }
     else if (btn.innerText === "DEL") {
-        // NOTE: Doesn't seem to register the KeyboardEvent so I can't really utilize backspace here.
-        display.deleteBeforeCursor();
+        ops.del();
     }
     else if (btn.innerText === "=") {
-        onEvalClick();
+        ops.evaluate();
     }
 }
 
 export function onEvalClick() {
-    const main_display = display.getMainDisplay();
-    const expression = main_display.value;
-
-    try {
-        const result = eval(expression);
-        console.log(result);
-        display.writeResult(result);
-        hist.addHistory({expression: expression, result: result});
-        
-        main_display.blur();
-    }
-    catch {
-        display.clearMainDisplay();
-        display.writeResult("Error");
-    }
 }
 
 function handleValue(value) {
     if (value !== '(') {
-        display.insertAfterCursor(value);
+        display.insert(value);
     }
     else {
         // Put cursor in between.
-        display.insertAfterCursor("()", 1);
-    }    
+        display.insert("(");
+        display.insert(")");
+        display.moveCursor(-1);
+    }
+
+    display.render();
 }
 
 function handleFunction(f) {
-    display.insertAfterCursor(f);
-}
-
-function displayHistory(history) {
-    const {expression, result} = history;
-    display.clearMainDisplay();
-    display.insertAfterCursor(expression);
-    display.writeResult(result);
+    // display.insertAfterCursor(f);
+    display.insert(f);
+    display.render();
 }
 
 // Allow user keyboard input.
@@ -124,32 +97,31 @@ document.addEventListener("keydown", (e) => {
     else if (ALLOWED_OP_KEYS.includes(key)) {
         if (key === "Enter" || key === "=") {
             e.preventDefault(); // Prevent the = key from showing up, even if for a moment.
-            onEvalClick();
+            // onEvalClick();
+            ops.evaluate();
         }
         else if (key === "Escape") {
-            display.clearMainDisplay();
-            display.clearResultDisplay();
+            ops.clearScreen();
         }
         else if (key === "Backspace") {
-            display.doIfResultPresent([
-                display.clearResultDisplay,
-                display.clearMainDisplay,
-            ]);
-        }
-        else if (key === "ArrowUp" || key === "ArrowDown") {
             e.preventDefault();
-
-            let getHistory = hist.getPreviousHistory;
-            if (key === "ArrowDown") {
-                getHistory = hist.getNextHistory;
-            }
-
-            const history = getHistory();
-            if (!history) {
-                return;
-            }
-
-            displayHistory(history);
+            ops.del();
+        }
+        else if (key === "ArrowUp") {
+            e.preventDefault();
+            ops.showLastHistory();
+        }
+        else if (key === "ArrowDown") {
+            e.preventDefault();
+            ops.showNextHistory();
+        }
+        else if (key === "ArrowLeft") {
+            e.preventDefault();
+            ops.moveCursorLeft();
+        }
+        else if (key === "ArrowRight") {
+            e.preventDefault();
+            ops.moveCursorRight();
         }
     }
     else {
