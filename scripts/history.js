@@ -27,4 +27,14 @@ export function addHistory(state) {
 
     history_ptr = history_stack.push(state) - 1;
     console.log(history_stack);
+    console.log("H Ptr: %d", history_ptr);
+}
+
+/**
+ * Force the history pointer to point pass the last history.
+ * 
+ * This is useful to temporarily represent user inputting state (history is being created!)
+ */
+export function toPresent() {
+    history_ptr = history_stack.length;
 }
