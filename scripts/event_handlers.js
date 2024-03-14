@@ -45,6 +45,9 @@ export function onOperatorClick(e) {
     else if (btn.innerText === "Down") {
         ops.showNextHistory();
     }
+    else if (btn.innerText === "Ans") {
+        ops.ans();
+    }
     else if (btn.innerText === "DEL") {
         ops.del();
     }

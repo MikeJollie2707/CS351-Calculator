@@ -33,6 +33,20 @@ export function del() {
     hist.toPresent();
 }
 
+export function ans() {
+    display.doIfResultPresent([display.clearLogicalExpr, display.clearResultDisplay]);
+    
+    hist.toPresent();
+    const history = hist.getPreviousHistory();
+    if (!history) {
+        return;
+    }
+
+    const { result } = history;
+    display.insert(`${result}`);
+    display.render();
+}
+
 export function showLastHistory() {
     const history = hist.getPreviousHistory();
     if (!history) {
