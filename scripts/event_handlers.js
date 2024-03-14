@@ -68,8 +68,41 @@ function handleValue(value) {
 
 function handleFunction(f) {
     display.doIfResultPresent([display.clearResultDisplay, display.clearLogicalExpr]);
-
-    display.insert(f);
+    
+    switch (f) {
+        case "\u{213c}": {
+            display.insert("Math.PI");
+            break;
+        }
+        case "e": {
+            display.insert("Math.E");
+            break;
+        }
+        case "sin":
+        case "cos":
+        case "tan": 
+        case "log2": {
+            display.insert(`Math.${f}(`);
+            display.insert(")");
+            display.moveCursor(-1);
+            break;
+        }
+        case "\u{221a}": {
+            display.insert("Math.sqrt(");
+            display.insert(")");
+            display.moveCursor(-1);
+            break;
+        }
+        case "\u{2223}x\u{2223}": {
+            display.insert("Math.abs(");
+            display.insert(")");
+            display.moveCursor(-1);
+            break;
+        }
+        default: {
+            display.insert(f);
+        }
+    }
     display.render();
 }
 
