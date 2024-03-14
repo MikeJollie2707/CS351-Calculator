@@ -27,6 +27,8 @@ export function clearScreen() {
 }
 
 export function del() {
+    display.doIfResultPresent([display.clearLogicalExpr, display.clearResultDisplay]);
+
     display.deleteBeforeCaret();
     display.render();
 

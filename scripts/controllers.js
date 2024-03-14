@@ -29,8 +29,7 @@ export function writeResult(result) {
 }
 
 export function clearResultDisplay() {
-    const res_display = getResultDisplay();
-    res_display.value = "";
+    writeResult("");
 }
 
 export function render() {
@@ -64,14 +63,12 @@ export function moveCursor(offset) {
 }
 
 export function insert(content) {
-    doIfResultPresent([clearLogicalExpr, clearResultDisplay]);
     logical_expr.splice(cursor_ptr + 1, 0, content);
     moveCursor(1);
 
     console.log(logical_expr);
 }
 export function deleteBeforeCaret() {
-    doIfResultPresent([clearLogicalExpr, clearResultDisplay]);
     if (cursor_ptr < 0) {
         return;
     }

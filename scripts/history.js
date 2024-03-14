@@ -20,7 +20,7 @@ export function getNextHistory() {
 }
 
 export function addHistory(state) {
-    const {expression, result} = state;
+    const { result } = state;
     if (result === "Error") {
         return;
     }

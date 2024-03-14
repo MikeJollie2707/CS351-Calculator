@@ -1,5 +1,4 @@
 import * as display from "./controllers.js";
-import * as hist from "./history.js";
 import * as ops from "./operators.js";
 
 // Keys that works as-is: You press, it shows up on the display
@@ -13,23 +12,18 @@ const ALLOWED_OP_KEYS = ["=", "Enter", "Backspace", "ArrowLeft", "ArrowRight", "
 export function onClick(e) {
     const btn = e.target;
     handleValue(btn.innerText);
-    
-    // Without this, pressing Enter after clicking a button will repeat that number.
-    btn.blur();
 }
 
 export function onFunctionClick(e) {
     const btn = e.target;
     handleFunction(btn.innerText);
-    
-    // Without this, pressing Enter after clicking a button will repeat that number.
-    btn.blur();
 }
 
 export function onOperatorClick(e) {
     // TODO: Maybe make a callback mapping?
     const btn = e.target;
     console.log(btn.innerText);
+
     if (btn.innerText === "AC") {
         ops.clearScreen();
     }
@@ -39,10 +33,10 @@ export function onOperatorClick(e) {
     else if (btn.innerText === "\u{25b7}") {
         ops.moveCursorRight();
     }
-    else if (btn.innerText === "Up") {
+    else if (btn.innerText === "\u{25b3}") {
         ops.showLastHistory();
     }
-    else if (btn.innerText === "Down") {
+    else if (btn.innerText === "\u{25bd}") {
         ops.showNextHistory();
     }
     else if (btn.innerText === "Ans") {
@@ -56,17 +50,16 @@ export function onOperatorClick(e) {
     }
 }
 
-export function onEvalClick() {
-}
-
 function handleValue(value) {
+    display.doIfResultPresent([display.clearResultDisplay, display.clearLogicalExpr]);
+    
     if (value !== '(') {
         display.insert(value);
     }
     else {
-        // Put cursor in between.
         display.insert("(");
         display.insert(")");
+        // Put cursor in between.
         display.moveCursor(-1);
     }
 
@@ -74,7 +67,8 @@ function handleValue(value) {
 }
 
 function handleFunction(f) {
-    // display.insertAfterCursor(f);
+    display.doIfResultPresent([display.clearResultDisplay, display.clearLogicalExpr]);
+
     display.insert(f);
     display.render();
 }
@@ -87,8 +81,6 @@ document.addEventListener("keydown", (e) => {
     // Since input field is writable, need to prevent
     // any input to be inserted to the field.
     // This is easy with preventDefault().
-    // However, we still want to move the cursor with arrows,
-    // backspace to delete, and more movement related if any.
     if (ALLOWED_REGULAR_KEYS.includes(key)) {
         e.preventDefault();
         handleValue(key);
@@ -98,32 +90,27 @@ document.addEventListener("keydown", (e) => {
         handleFunction(key);
     }
     else if (ALLOWED_OP_KEYS.includes(key)) {
+        e.preventDefault();
+
         if (key === "Enter" || key === "=") {
-            e.preventDefault(); // Prevent the = key from showing up, even if for a moment.
-            // onEvalClick();
             ops.evaluate();
         }
         else if (key === "Escape") {
             ops.clearScreen();
         }
         else if (key === "Backspace") {
-            e.preventDefault();
             ops.del();
         }
         else if (key === "ArrowUp") {
-            e.preventDefault();
             ops.showLastHistory();
         }
         else if (key === "ArrowDown") {
-            e.preventDefault();
             ops.showNextHistory();
         }
         else if (key === "ArrowLeft") {
-            e.preventDefault();
             ops.moveCursorLeft();
         }
         else if (key === "ArrowRight") {
-            e.preventDefault();
             ops.moveCursorRight();
         }
     }
