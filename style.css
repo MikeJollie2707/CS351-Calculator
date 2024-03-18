@@ -1,6 +1,7 @@
 body {
     display: flex;
     justify-content: center;
+    background-color: lightcyan;
 }
 
 input {
@@ -11,6 +12,7 @@ input:focus {
 }
 #result-display {
     text-align: right;
+    color: black;
 }
 
 .container {
@@ -22,6 +24,8 @@ input:focus {
     border-color: black;
 
     padding: 6px 6px 6px 6px;
+
+    background-color: #B2DFDB;
 }
 
 .displays {
@@ -29,6 +33,8 @@ input:focus {
     border-style: solid;
     border-width: 2px;
     border-radius: 2px;
+
+    color: crimson;
 }
 
 .operators-btns {
