@@ -15,7 +15,15 @@ export function onClick(e) {
 }
 
 export function onFunctionClick(e) {
-    const btn = e.target;
+    // This "btn" may not always be a button.
+    // In log2 case, it can be the <sub> element, which will make
+    // btn.innerText result to 2 and not log2.
+    // A temporary fix is if the HTML is saying something special (via the id attr)
+    // then we reassign btn to the parent element (which is the <button>)
+    let btn = e.target;
+    if (btn.id != "") {
+        btn = btn.parentElement;
+    }
     handleFunction(btn.innerText);
 }
 
