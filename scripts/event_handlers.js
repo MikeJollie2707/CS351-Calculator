@@ -95,8 +95,8 @@ function handleFunction(f) {
         case "tan": 
         case "log2": {
             display.insert(`Math.${f}(`);
-            display.insert(")");
-            display.moveCursor(-1);
+            // display.insert(")");
+            // display.moveCursor(-1);
             break;
         }
         case "\u{221a}": {
