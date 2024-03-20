@@ -21,9 +21,13 @@ export function onFunctionClick(e) {
     // A temporary fix is if the HTML is saying something special (via the id attr)
     // then we reassign btn to the parent element (which is the <button>)
     let btn = e.target;
-    if (btn.id != "") {
-        btn = btn.parentElement;
+    while (btn !== null && btn?.nodeName !== "BUTTON") {
+        btn = btn?.parentElement;
     }
+    if (btn === null) {
+        return;
+    }
+
     handleFunction(btn.innerText);
 }
 

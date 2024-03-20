@@ -42,13 +42,12 @@
         <button class="func-btn">e</button>
         <button class="func-btn">&#x221A;</button>
         <button class="func-btn">&#x2223;x&#x2223;</button>
-        <button class="func-btn">log
-          <!-- So if user click on the 2, only the <sub> will be sent
-              to JS and not the <button>, which makes innerText incorrect.
-              To circumvene this, assign an ID so JS can work it out.
-           -->
-          <sub id="log2">2</sub>
-        </button>
+        <!-- 
+          So if user click on the 2, only the <sub> will be sent
+          to JS and not the <button>, which makes innerText incorrect.
+          To circumvene this, assign an ID so JS can work it out.
+        -->
+        <button class="func-btn">log<sub id="log2">2</sub></button>
       </div>
 
       <div class="main-btns grid">
