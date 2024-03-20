@@ -2,6 +2,7 @@ body {
     display: flex;
     justify-content: center;
     background-color: lightcyan;
+    font-family: 'Times New Roman', 'monospace', 'Arial';
 }
 
 input {
@@ -21,7 +22,7 @@ input:focus {
     border-style: solid;
     border-width: 2px 2px 2px 2px;
     border-radius: 6px;
-    border-color: black;
+    border-color: crimson;
 
     padding: 6px 6px 6px 6px;
 
