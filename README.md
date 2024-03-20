@@ -1,7 +1,7 @@
 Abia Khan, Shanzay Ahmed, Bach Ngo
 
 
-**Simple Calculator **
+Simple Calculator
 
 This project involves creating a basic calculator that can perform operations like addition, 
 subtraction, multiplication, and division. HTML will be utilized to create the user interface, 
