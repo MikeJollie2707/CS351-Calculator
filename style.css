@@ -7,6 +7,7 @@ body {
 
 input {
     border-style: none;
+    background-color: #EAECEE;
 }
 input:focus {
     outline: none;
@@ -50,3 +51,16 @@ input:focus {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 4px;
 }
+
+.normal-btn,
+.func-btn,
+.op-btn
+ {
+    background-color: #EBDEF0;
+    border-color: orangered;
+}
+
+.func-btn {color: #641E16;}
+.op-btn {color: #117A65;}
+.normal-btn {color: #BA4A00;}
+
