@@ -1,6 +1,8 @@
 Abia Khan, Shanzay Ahmed, Bach Ngo
 
 
+
+
 Simple Calculator
 
 This project involves creating a basic calculator that can perform operations like addition, 
