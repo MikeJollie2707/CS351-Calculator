@@ -4,10 +4,16 @@ body {
     background-color: lightcyan;
     font-family: 'Times New Roman', 'monospace', 'Arial';
 }
+button {
+    font-weight: bold;
+}
 
 input {
     border-style: none;
     background-color: #EAECEE;
+    font-family: monospace;
+    caret-color: crimson;
+    height: 100%;
 }
 input:focus {
     outline: none;
@@ -37,10 +43,13 @@ input:focus {
     border-radius: 2px;
 
     color: crimson;
+    min-height: 50px;
 }
 
 .operators-btns {
-    width: 40%;
+    width: 36%;
+    gap: 2px;
+    min-width: 83px;
 }
 .functions-btns {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
