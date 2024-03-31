@@ -60,11 +60,11 @@ export function render() {
 export function moveCursor(offset) {
     cursor_ptr += offset;
     
-    if (cursor_ptr >= logical_expr.length - 1) {
-        cursor_ptr = logical_expr.length - 1;
+    if (cursor_ptr > logical_expr.length - 1) {
+        cursor_ptr = -1;
     }
     else if (cursor_ptr < -1) {
-        cursor_ptr = -1;
+        cursor_ptr = logical_expr.length - 1;
     }
 }
 
