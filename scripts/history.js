@@ -26,8 +26,6 @@ export function addHistory(state) {
     }
 
     history_ptr = history_stack.push(state) - 1;
-    console.log(history_stack);
-    console.log("H Ptr: %d", history_ptr);
 }
 
 /**

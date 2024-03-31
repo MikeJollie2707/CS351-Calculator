@@ -5,7 +5,7 @@ import * as ops from "./operators.js";
 // The only exception here is the '(', which will also display a closing parentheses.
 const ALLOWED_REGULAR_KEYS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '(', ')']
 // Keys that will create a mathematical function. This includes basic arithmetic operators.
-const ALLOWED_FUNC_KEYS = ['+', '-', '*', '/']
+const ALLOWED_FUNC_KEYS = ['+', '-', '*', '/', '^']
 // Keys that will "do something" to the calculator itself.
 const ALLOWED_OP_KEYS = ["=", "Enter", "Backspace", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Escape"]
 
@@ -19,11 +19,14 @@ export function onFunctionClick(e) {
     // In log2 case, it can be the <sub> element, which will make
     // btn.innerText result to 2 and not log2.
     // A temporary fix is if the HTML is saying something special (via the id attr)
-    // then we reassign btn to the parent element (which is the <button>)
+    // then we keep reassign btn to the parent element until we hit the <button>
     let btn = e.target;
-    while (btn !== null && btn?.nodeName !== "BUTTON") {
-        btn = btn?.parentElement;
+    if (btn.id !== "" || btn?.nodeName !== "BUTTON") {
+        while (btn !== null && btn?.nodeName !== "BUTTON") {
+            btn = btn?.parentElement;
+        }
     }
+    // Clicked on something, parent lookup returns document instead.
     if (btn === null) {
         return;
     }
@@ -32,9 +35,7 @@ export function onFunctionClick(e) {
 }
 
 export function onOperatorClick(e) {
-    // TODO: Maybe make a callback mapping?
     const btn = e.target;
-    console.log(btn.innerText);
 
     if (btn.innerText === "AC") {
         ops.clearScreen();
@@ -90,6 +91,10 @@ function handleFunction(f) {
             display.insert("Math.E");
             break;
         }
+        case "^": {
+            display.insert("**");
+            break;
+        }
         case "sin":
         case "cos":
         case "tan": 
@@ -101,14 +106,14 @@ function handleFunction(f) {
         }
         case "\u{221a}": {
             display.insert("Math.sqrt(");
-            display.insert(")");
-            display.moveCursor(-1);
+            // display.insert(")");
+            // display.moveCursor(-1);
             break;
         }
         case "\u{2223}x\u{2223}": {
             display.insert("Math.abs(");
-            display.insert(")");
-            display.moveCursor(-1);
+            // display.insert(")");
+            // display.moveCursor(-1);
             break;
         }
         default: {
