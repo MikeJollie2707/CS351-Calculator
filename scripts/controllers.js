@@ -1,16 +1,7 @@
 /**
  * 2 displays: main display (where user input happens) and result display (only show result)
  * result display is very simple, it has almost no abstraction.
- * main display has an abstraction layer.
- */
-
-/**
- * 2. Should exponent be ** or Math.pow()
- * - ** is only recommended after implementing point 1.
- * 
- * 3. Ans
- * - Ans will act like MR in old calculator: It'll inject the value upon press. The difference is it'll inject previous result. It is an op btn.
- * 
+ * main display has an abstraction layer (logical_expr acts as a buffer).
  */
 
 const logical_expr = [];
@@ -23,15 +14,25 @@ export function getResultDisplay() {
     return document.getElementById("result-display");
 }
 
+/**
+ * Write `result` to the result display. This is immediately visible.
+ * @param {string | number} result Content to write.
+ */
 export function writeResult(result) {
     const res_display = getResultDisplay();
     res_display.value = result;
 }
-
+/**
+ * Clear result display. This is immediately visible.
+ */
 export function clearResultDisplay() {
     writeResult("");
 }
 
+/**
+ * Display the content of the expression "buffer" to the calculator display.
+ * More importantly, it'll set caret to the correct position.
+ */
 export function render() {
     const main_display = getMainDisplay();
 
@@ -44,30 +45,45 @@ export function render() {
     
     main_display.value = expr;
     
+    // Fix https://github.com/MikeJollie2707/CS351-Calculator/issues/1
     main_display.blur();
     main_display.focus();
     main_display.setSelectionRange(cursor_pos, cursor_pos);
 }
 
+/**
+ * Move the expression buffer caret by an offset.
+ * 
+ * If the offset causes out of bound, caret will be moved to the extreme ends.
+ * @param {number} offset How much to the right to move the caret. Negative numbers to move to the left.
+ */
 export function moveCursor(offset) {
-    // TODO: Reorganize this code.
-    if (cursor_ptr + offset >= logical_expr.length - 1) {
-        cursor_ptr = logical_expr.length - 1;
-        return;
-    }
-    if (cursor_ptr + offset < -1) {
-        cursor_ptr = -1;
-        return;
-    }
     cursor_ptr += offset;
+    
+    if (cursor_ptr >= logical_expr.length - 1) {
+        cursor_ptr = logical_expr.length - 1;
+    }
+    else if (cursor_ptr < -1) {
+        cursor_ptr = -1;
+    }
 }
 
+/**
+ * Insert `content` to the expression buffer.
+ * 
+ * Note that this change will not be visible until `render()` is called.
+ */
 export function insert(content) {
     logical_expr.splice(cursor_ptr + 1, 0, content);
     moveCursor(1);
 
     console.log(logical_expr);
 }
+/**
+ * Delete the element at the caret in the expression buffer.
+ * 
+ * Note that this change will not be visible until `render()` is called.
+ */
 export function deleteBeforeCaret() {
     if (cursor_ptr < 0) {
         return;
@@ -77,10 +93,19 @@ export function deleteBeforeCaret() {
 
     console.log(logical_expr);
 }
+/**
+ * Empty the expression buffer.
+ * 
+ * Note that this change will not be visible until `render()` is called.
+ */
 export function clearLogicalExpr() {
     logical_expr.splice(0, logical_expr.length);
     cursor_ptr = -1;
 }
+/**
+ * Get the expression buffer.
+ * @returns {Array<string>} The expression buffer.
+ */
 export function getLogicalExpr() {
     return logical_expr;
 }

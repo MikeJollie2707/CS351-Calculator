@@ -14,7 +14,7 @@ for (const btn of op_btns) {
     btn.addEventListener("click", (e) => listener.onOperatorClick(e));
 }
 
-// Fix #1
+// Fix https://github.com/MikeJollie2707/CS351-Calculator/issues/1
 document.onmousedown = (e) => {
     // Prevent focus from losing from the input field.
     e.preventDefault();
